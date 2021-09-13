@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" media="all"></link>
+    <!-- <link rel="stylesheet" href="SocialButton.css" media="all"></link> -->
+    <title>萬年曆ByVue</title>
+</head>
+<body>
+    
+    <div id="app" class="app">
+        <div class="header">
+            萬年曆&TodoList
+        </div>
+        <div class="dateblk">
+            <div class="title">
+                <div class="yearmonth">{{year_month.year}}年{{year_month.month}}月</div>
+                <div class="prenext" @click="premonth()">&and;</div>
+                <div class="prenext" @click="nextmonth()">&or;</div>
+            </div>
+            <div class="datelist">
+                <div class="perdate" v-for = "item in week">
+                    {{item}}
+                </div>
+                <div class="perdate" v-for = "item in Showdate" :class="{ dfadeout : item.dfadeout, todaycolor: item.todaycolor}">
+                    {{item.content}}
+                </div>
+            </div>
+        </div>
+        <div class="todoli">
+            <input type="text" placeholder="請輸入代辦事項" @keyup.enter="addTodo()" v-model="input.newTode" ref= "xxx" >
+            <h3>代辦事項列表</h3>
+            <div class="selectall" v-show = selectall>
+                <input type="checkbox" v-model="checkall" >
+                <span style="vertical-align: middle;">全選</span>
+            </div>   
+            <ul>
+                <li v-for= "(item,index) in filtertodos">
+                    <input type="checkbox" value="" v-model="item.completed" >
+                    <span class="todocont" >{{item.newTode}}</span> 
+                    <input type="button" value="修改" @click = "contmodify(index)">
+                    <input type="button" value="刪除" @click = "removeTode(index)">
+                    <!-- <input type="button" value= "&uarr;" class="arr" @click="dataup(index)">
+                    <input type="button" value= "&darr;" class="arr" @click="datadown(index)"> -->
+                    <!-- <span class="delete" ></span> -->
+                </li>
+            </ul>
+            <div class="opera">
+                <div class="opeitem itemleft">{{uncompletedcount}} 待辦事項</div>
+                <div class="opeitem active" :class="{ pressed: pressall == 0}" @click="Show_All()" >
+                    全部
+                </div>
+                <div class="opeitem active" :class="{ pressed: pressact == 1}" @click="Show_Act()">
+                    未完成
+                </div>
+                <div class="opeitem active" :class="{ pressed: presscomplet == 2}" @click="Show_Complet()">
+                    已完成
+                </div>
+                <div class="opeitem clearcomp " >
+                    <span @click = "removecomple()">清除已完成事項</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

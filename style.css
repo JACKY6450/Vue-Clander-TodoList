@@ -1,0 +1,176 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    list-style: none;
+}
+body{
+    /* background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(234,249,249,0.67) 0.1%, rgba(239,249,251,0.63) 90.1% ); */
+    background-color: #00bfff;
+}
+input[type = text]{
+    width: 100%;
+    font-size: 20px;
+    padding: 5px 0px 5px 15px;
+    /* border-radius: 2px; */
+}
+input[type = text]:focus{
+    outline: none;
+    border: 2px solid purple;
+}
+input[type = checkbox]{
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    vertical-align: middle;
+    position: relative;
+}
+input[type = checkbox]:checked+ .todocont{
+    opacity: .6;
+    text-decoration: line-through;
+}
+input[type = button]{
+    margin-left: 5px;
+    padding: 2px 4px;
+    font-size: 14px;
+    border: 2px solid #aaaaaa;
+    background-color: green;
+    color: white;
+    vertical-align: middle;
+}
+input[type="button"]:hover{
+    color: yellow;
+    opacity: .8;
+}
+.header{
+    font-size: 36px;
+    background-image: linear-gradient( 63.1deg,  rgba(5,23,111,1) 16.4%, rgba(24,95,240,1) 64.5% );
+    padding: 6px 8px;
+    font-weight: bold;
+    color: white;
+}
+.app .dateblk{
+    width: 60%;
+    margin: 8px 28px;
+}
+.app .title{
+    margin: 2px;
+    padding: 10px;
+    display: flex;
+    background-color: white;
+}
+.app .title .yearmonth{
+    flex: auto;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0px 30px;
+    /* border: 1px solid black; */
+}
+.app .title .prenext{
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0px 30px;
+    /* border: 1px solid black; */
+}
+.app .title .prenext:hover{
+    opacity: .7;
+}
+.app .datelist{
+    display: flex;
+    flex-wrap: wrap;
+}
+.app .datelist .perdate{
+    flex: auto;
+    width: 13%;
+    height: 70px;
+    margin: 2px;
+    line-height: 70px;
+    text-align: center;
+    font-size: 24px;
+    background-color: white;
+}
+.app .datelist .dfadeout{
+    color: rgba(00, 00 , 00, .6);
+    /* opacity: .6; */
+}
+.app .datelist .todaycolor{
+    background-color: orange;
+}
+.app .todoli{
+    width: 60%;
+    margin: 20px 30px;
+    padding: 5px 5px 0px 5px;
+    font-size: 20px;
+    background-color: white;
+    border-radius: 5px;
+    /* box-shadow: 3px 3px 3px 2px #888888; */
+}
+.app .todoli h3{
+    margin: 5px 15px;
+}
+.app .todoli .selectall{
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+.app .todoli ul li{
+    padding: 10px 15px;
+    border-bottom: 2px solid #cccccc;
+    position: relative;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+}
+.app .todoli ul li input[type = checkbox]{
+    margin-right: 10px;
+}
+.app .todoli ul li .todocont{
+    flex: auto;
+    vertical-align: middle;
+    /* border: 1px solid black; */
+}
+.app .todoli ul li .arr{
+    width: 20px;
+    margin-right: 5px;
+}
+.app .todoli .opera{
+    margin: 0px 15px;
+    padding: 3px 0px;
+    display: flex;
+}
+.app .todoli .opera .opeitem{
+    flex: auto;
+    width: 20%;
+    padding: 6px 0px;
+    margin-right: 8px;
+    color: #999999;
+    font-size: 16px;
+    /* border: 1px solid black; */
+}
+.app .todoli .opera .itemleft{
+    width: 30%;
+}
+.app .todoli .opera .active{
+    width: auto;
+    text-align: center;
+    cursor: pointer;
+}
+.app .todoli .opera .active:hover{
+    opacity: .8;
+    background-color: #666;
+    color: white;
+}
+.app .todoli .opera .clearcomp{
+    width: 35%;
+    margin-right: 0px;
+    text-align: right;
+}
+.app .todoli .opera .clearcomp span{
+    cursor: pointer;
+}
+.app .todoli .opera .clearcomp span:hover{
+    text-decoration: underline;
+}
+.app .todoli .opera .pressed{
+    background-color: #666;
+    color: white;
+}
