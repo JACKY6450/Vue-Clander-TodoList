@@ -11,7 +11,7 @@ body{
 input[type = text]{
     width: 100%;
     font-size: 20px;
-    padding: 5px 0px 5px 15px;
+    padding: 3px 0px 3px 8px;
     /* border-radius: 2px; */
 }
 input[type = text]:focus{
@@ -42,16 +42,10 @@ input[type="button"]:hover{
     color: yellow;
     opacity: .8;
 }
-.header{
-    font-size: 36px;
-    background-image: linear-gradient( 63.1deg,  rgba(5,23,111,1) 16.4%, rgba(24,95,240,1) 64.5% );
-    padding: 6px 8px;
-    font-weight: bold;
-    color: white;
-}
 .app .dateblk{
     width: 60%;
     margin: 8px 28px;
+    margin-top: 20px;
 }
 .app .title{
     margin: 2px;
@@ -99,42 +93,51 @@ input[type="button"]:hover{
 .app .todoli{
     width: 60%;
     margin: 20px 30px;
-    padding: 5px 5px 0px 5px;
+    padding: 10px 5px 0px 5px;
     font-size: 20px;
     background-color: white;
     border-radius: 5px;
     /* box-shadow: 3px 3px 3px 2px #888888; */
+}
+.app .todoli .inputgroup{
+    padding: 0px 15px;
+    display: flex;
+}
+.app .todoli .inputgroup input[type = button]{
+    padding: 2px 8px;
 }
 .app .todoli h3{
     margin: 5px 15px;
 }
 .app .todoli .selectall{
     padding-left: 15px;
-    margin-bottom: 5px;
+    margin: 15px 0px 5px 0px;
 }
-.app .todoli ul li{
-    padding: 10px 15px;
+
+.app .todoli .listgroup{
+    margin: 0px 15px;
+    padding: 10px 0px;
     border-bottom: 2px solid #cccccc;
     position: relative;
     /* border: 1px solid black; */
     display: flex;
     align-items: center;
 }
-.app .todoli ul li input[type = checkbox]{
+.app .todoli .listgroup input[type = checkbox]{
     margin-right: 10px;
 }
-.app .todoli ul li .todocont{
+.app .todoli .listgroup .todocont{
     flex: auto;
     vertical-align: middle;
     /* border: 1px solid black; */
 }
-.app .todoli ul li .arr{
+.app .todoli .listgroup .arr{
     width: 20px;
     margin-right: 5px;
 }
 .app .todoli .opera{
     margin: 0px 15px;
-    padding: 3px 0px;
+    padding: 10px 0px;
     display: flex;
 }
 .app .todoli .opera .opeitem{

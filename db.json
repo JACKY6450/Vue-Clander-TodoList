@@ -1,24 +1,34 @@
 {
   "todos": [
     {
-      "newTode": "購買蘋果日報",
+      "newTode": "第一件",
       "completed": false,
+      "edittodo": false,
+      "id": 1
+    },
+    {
+      "newTode": "第二件",
+      "completed": false,
+      "edittodo": false,
       "id": 2
     },
     {
-      "newTode": "買一杯手搖",
+      "newTode": "第三件",
       "completed": false,
+      "edittodo": false,
+      "id": 3
+    },
+    {
+      "newTode": "第四件",
+      "completed": false,
+      "edittodo": false,
       "id": 4
     },
     {
-      "newTode": "下午兩點面試",
+      "newTode": "第五件",
       "completed": false,
+      "edittodo": false,
       "id": 5
-    },
-    {
-      "newTode": "下午五點跟朋友見面",
-      "completed": false,
-      "id": 6
     }
   ],
   "prizelist": [

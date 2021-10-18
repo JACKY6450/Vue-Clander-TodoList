@@ -17,14 +17,18 @@ let app = new Vue({
         todos:[], //isall, isact, iscomplet
         selectall: false,
         pressall: 0,
-        // pressact: false,
-        // presscomplet: false,
-        modifycont: false,
-        editindex: null,
         visibility: "allitem",
         input: {   
             newTode: '',
-            completed :false
+            completed :false,
+            edittodo: false
+        },
+        unmodify: true,
+        editindex: null,
+        modifytodo: {   
+            newTode: '',
+            completed :false,
+            edittodo: false
         },
     },
     computed:{
@@ -141,57 +145,45 @@ let app = new Vue({
         addTodo(){ //Vue.js methods 用this可以去抓data:{}裡面的資料
             let datavalue = this.input.newTode;    
             if(!datavalue) return;
-            if(!this.modifycont){ //加資料
-                axios.post('http://localhost:3000/todos', this.input)
-                .then((res)=>{
-                    console.log(res);
-                    this.todos.push(res.data);
-                    // console.log(this.todos);
-                })
-                .catch((err)=>{
-                    console.log(err);
-                })  
-                // this.todos.push({ //把資料寫進todos[]裡面
-                //     content: this.input.newTode,
-                //     completed: false,
-                // }); 
-                this.input.newTode = '';
-                if(!this.selectall) this.selectall = true;
-            }
-            else{                  //修改資料
-                if(confirm('確定要修改 ?')){
-                    let id = this.todos[this.editindex].id;
-                    console.log(id);
-                    axios.put('http://localhost:3000/todos/' + id, this.input)
-                    .then((res)=>{
-                        this.todos.splice(this.editindex,1,res.data)//刪一筆資料寫一筆資料進去
-                        // this.todos[this.editindex] = res.data;
-                        this.editindex = null;
-                    })
-                    .catch((err)=>{
-                        console.log(err);
-                    })
-                    this.input.newTode = '';
-                    modifycont = false;
-                }
-                else{
-                    this.input.newTode = '';
-                    modifycont = false;
-                }
-            }   
+            axios.post('http://localhost:3000/todos', this.input)
+            .then((res)=>{
+                console.log(res);
+                this.todos.push(res.data);
+                // console.log(this.todos);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })  
+            // this.todos.push({ //把資料寫進todos[]裡面
+            //     content: this.input.newTode,
+            //     completed: false,
+            // }); 
+            this.input.newTode = '';
+            if(!this.selectall) this.selectall = true;
+            
         },
-        removeTode(index){
-            let target = this.todos[index];
+        removeTode(item){
+            let target;
+            let tempindex;
+            target = this.todos.find((ele, index) => {
+                if(ele.newTode === item.newTode){
+                    tempindex = index;
+                    return{
+                        ele 
+                    }
+                }
+            })
+            console.log(target, tempindex);
             if (confirm('你確要刪除此項 ?')){
                 axios.delete('http://localhost:3000/todos/' +target.id)
                 .then((res)=>{
-                    
+                    console.log(res.data);
                 })
                 .catch((err)=>{
                     console.log(err);
                 })
                 
-                this.todos.splice(index, 1);
+                this.todos.splice(tempindex, 1);
             }
             if(this.todos.length==0){
                 this.selectall = false;
@@ -234,25 +226,32 @@ let app = new Vue({
             this.visibility = "completeditem";
             this.pressall = 2;
         },
-        contmodify(index){
-            this.modifycont = true;
+        contmodify(item, index){
+            // this.modifycont = true;
+            this.unmodify = false;
+            item.edittodo = true;
+            this.modifytodo.newTode = item.newTode;
             this.editindex = index;
-            this.input.newTode = this.todos[index].newTode;
+            // this.input.newTode = this.todos[index].newTode;
         },
-        dataup(index){
-            if(index == 0) return;
-            if(this.visibility == "allitem"){
-                this.todos.splice(index-1,0,(this.todos[index]));
-                this.todos.splice(index+1,1);
-            }
+        modifyconfirm(){
+            // this.todos[this.editindex].newTode = this.modifytodo.newTode;
+            // this.todos[this.editindex].edittodo = false;
+            // this.modifytodo = '';
+            let id = this.todos[this.editindex].id;
+            // console.log(id);
+            axios.put('http://localhost:3000/todos/' + id, this.modifytodo)
+            .then((res)=>{
+                this.todos.splice(this.editindex,1,res.data)//刪一筆資料寫一筆資料進去
+                // this.todos[this.editindex] = res.data;
+                this.modifytodo.newTode = '';
+                this.editindex = null;
+                this.unmodify = true;
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
             
-        },
-        datadown(index){
-            if(index == this.todos.length-1) return;
-            if(this.visibility == "allitem"){
-                this.todos.splice(index+2,0,(this.todos[index]));
-                this.todos.splice(index,1);
-            }
         }
     },
     mounted(){

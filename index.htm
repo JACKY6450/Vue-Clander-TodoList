@@ -11,9 +11,6 @@
 <body>
     
     <div id="app" class="app">
-        <div class="header">
-            萬年曆&TodoList
-        </div>
         <div class="dateblk">
             <div class="title">
                 <div class="yearmonth">{{year_month.year}}年{{year_month.month}}月</div>
@@ -30,32 +27,39 @@
             </div>
         </div>
         <div class="todoli">
-            <input type="text" placeholder="請輸入代辦事項" @keyup.enter="addTodo()" v-model="input.newTode" ref= "xxx" >
-            <h3>代辦事項列表</h3>
+            <div class="inputgroup">
+                <input type="text" placeholder="請輸入代辦事項" @keyup.enter="addTodo()" v-model="input.newTode" ref= "xxx" >
+                <input type="button" value="新增" @click = "addTodo()">
+            </div>
+            <!-- <h3>代辦事項列表</h3> -->
             <div class="selectall" v-show = selectall>
                 <input type="checkbox" v-model="checkall" >
                 <span style="vertical-align: middle;">全選</span>
             </div>   
             <ul>
-                <li v-for= "(item,index) in filtertodos">
-                    <input type="checkbox" value="" v-model="item.completed" >
-                    <span class="todocont" >{{item.newTode}}</span> 
-                    <input type="button" value="修改" @click = "contmodify(index)">
-                    <input type="button" value="刪除" @click = "removeTode(index)">
-                    <!-- <input type="button" value= "&uarr;" class="arr" @click="dataup(index)">
-                    <input type="button" value= "&darr;" class="arr" @click="datadown(index)"> -->
-                    <!-- <span class="delete" ></span> -->
-                </li>
+                <li v-for= "(item,index) in filtertodos" >
+                    <div class="listgroup" v-if = "!item.edittodo">
+                        <input type="checkbox" value="" v-model="item.completed" >
+                        <span class="todocont" >{{item.newTode}}</span> 
+                        <input type="button" value="修改" @click = "unmodify && contmodify(item, index) ">
+                        <input type="button" value="刪除" @click = "removeTode(item)">
+                    </div>
+        
+                    <div class="listgroup" v-else>
+                        <input type="text" name="" id="" v-model = "modifytodo.newTode" @keyup.enter = "modifyconfirm()">
+                        <input type="button" value="確認" @click = "modifyconfirm()">
+                    </div>
+                </li>            
             </ul>
             <div class="opera">
                 <div class="opeitem itemleft">{{uncompletedcount}} 待辦事項</div>
                 <div class="opeitem active" :class="{ pressed: pressall == 0}" @click="Show_All()" >
                     全部
                 </div>
-                <div class="opeitem active" :class="{ pressed: pressact == 1}" @click="Show_Act()">
+                <div class="opeitem active" :class="{ pressed: pressall == 1}" @click="Show_Act()">
                     未完成
                 </div>
-                <div class="opeitem active" :class="{ pressed: presscomplet == 2}" @click="Show_Complet()">
+                <div class="opeitem active" :class="{ pressed: pressall == 2}" @click="Show_Complet()">
                     已完成
                 </div>
                 <div class="opeitem clearcomp " >
