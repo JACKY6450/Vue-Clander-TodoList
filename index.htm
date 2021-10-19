@@ -41,13 +41,14 @@
                     <div class="listgroup" v-if = "!item.edittodo">
                         <input type="checkbox" value="" v-model="item.completed" >
                         <span class="todocont" >{{item.newTode}}</span> 
-                        <input type="button" value="修改" @click = "unmodify && contmodify(item, index) ">
+                        <input type="button" value="修改" @click = "unmodify && contmodify(item)">
                         <input type="button" value="刪除" @click = "removeTode(item)">
                     </div>
         
                     <div class="listgroup" v-else>
-                        <input type="text" name="" id="" v-model = "modifytodo.newTode" @keyup.enter = "modifyconfirm()">
-                        <input type="button" value="確認" @click = "modifyconfirm()">
+                        <input type="text" name="" id="" v-model = "modifytodo.newTode" 
+                         @keyup.enter = "modifyconfirm(item)" @keyup.esc = "cancelmodify(item)">
+                        <input type="button" value="確認" @click = "modifyconfirm(item)">
                     </div>
                 </li>            
             </ul>

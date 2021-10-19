@@ -163,15 +163,10 @@ let app = new Vue({
             
         },
         removeTode(item){
-            let target;
-            let tempindex;
-            target = this.todos.find((ele, index) => {
-                if(ele.newTode === item.newTode){
-                    tempindex = index;
-                    return{
-                        ele 
-                    }
-                }
+            let target = item;
+            // let tempindex;
+            let tempindex = this.todos.findIndex((ele, index) => {
+                return ele.newTode === item.newTode;
             })
             console.log(target, tempindex);
             if (confirm('你確要刪除此項 ?')){
@@ -226,32 +221,34 @@ let app = new Vue({
             this.visibility = "completeditem";
             this.pressall = 2;
         },
-        contmodify(item, index){
+        contmodify(item){
             // this.modifycont = true;
             this.unmodify = false;
             item.edittodo = true;
             this.modifytodo.newTode = item.newTode;
-            this.editindex = index;
             // this.input.newTode = this.todos[index].newTode;
         },
-        modifyconfirm(){
-            // this.todos[this.editindex].newTode = this.modifytodo.newTode;
-            // this.todos[this.editindex].edittodo = false;
-            // this.modifytodo = '';
-            let id = this.todos[this.editindex].id;
+        modifyconfirm(item){
             // console.log(id);
+            let id = item.id;
             axios.put('http://localhost:3000/todos/' + id, this.modifytodo)
             .then((res)=>{
-                this.todos.splice(this.editindex,1,res.data)//刪一筆資料寫一筆資料進去
+                // this.todos.splice(this.editindex,1,res.data)//刪一筆資料寫一筆資料進去
                 // this.todos[this.editindex] = res.data;
+                item.newTode = this.modifytodo.newTode;
+                item.edittodo = false;
                 this.modifytodo.newTode = '';
-                this.editindex = null;
                 this.unmodify = true;
             })
             .catch((err)=>{
                 console.log(err);
             })
             
+        },
+        cancelmodify(item){
+            this.unmodify = true;
+            item.edittodo = false;
+            this.modifytodo.newTode = '';
         }
     },
     mounted(){
