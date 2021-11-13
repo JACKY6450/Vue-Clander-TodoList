@@ -16,6 +16,8 @@
 3.在此專案資料夾底下架設Json-Server
 <br>
 `Json-Server db.json`
+<br>
+port: 3000
 <br><br>
 4.打開index.htm網頁開始操作
 ## 環境建置與需求
